@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EntrepriseController!{% endblock %}
+
+{% block body %}
+<div class="container text-center px-5 py-3 my-3 bg-warning rounded-3 shadow-lg bg-opacity-50" id="tableau">
+        <h3 class="fw-bold display-5 my-3 pb-3">Liste des employés</h3>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center">{{ message }}</div>
+        {% endfor %}
+
+        <a href="{{ path('addEmp') }}" style="font-size: 30px;" class="fw-bold text-center text-primary nav-link">Ajouter un employé</a>
+
+        <table class="table table-info table-striped table-hover my-3">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">adresse</th>
+                <th scope="col">Salaire</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col">Option</th>
+            </tr>
+            {% for emp in tabEmployes %}
+            <tr>
+                <th scope="row">{{ emp.id }}</th>
+                <td>{{ emp.prenom }}</td>
+                <td>{{ emp.nom }}</td>
+                <td>{{ emp.telephone }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.adresse }}</td>
+                <td>{{ emp.salaire }}</td>
+                <td>{{ emp.datedenaissance|date("d/m/Y") }}</td>
+                <td>
+                <a href="{{ path('updEmp', {id:emp.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                <a href="{{ path('delEmp', {id:emp.id}) }}" onclick="return(confirm('Etes-vous certain de vouloir supprimer cet employé?'))"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

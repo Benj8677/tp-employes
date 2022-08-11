@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container text-center px-5 py-3 my-3 bg-warning rounded-3 shadow-lg bg-opacity-50">
+
+<h1 class="mb-4">
+{% if editMode %}
+    Modification d'un employé
+{% else %}
+    Ajout d'un employé
+{% endif %}
+</h1>
+{# {{ form(formEmployes) }} #}
+
+{{ form_start(formEmployes, {
+    attr:{
+        novalidate: 'novalidate'
+    }
+}) }}
+<div class="row">
+{{ form_row(formEmployes.prenom) }}
+{{ form_row(formEmployes.nom)  }}
+{{ form_row(formEmployes.telephone) }}
+{{ form_row(formEmployes.email) }}
+{{ form_row(formEmployes.adresse) }}
+{{ form_row(formEmployes.salaire) }}
+{{ form_row(formEmployes.datedenaissance) }}
+{{ form_row(formEmployes.poste) }}
+</div>
+
+{% if editMode %}
+<button type="submit" class="btn btn-primary mt-2 h3 ">Modifier</button>
+{% else %}
+<button type="submit" class="btn btn-primary mt-2 h3 ">Ajouter</button>
+{% endif %}
+
+<a href="{{ path('app_entreprise') }}" class="fw-bold h3 text-center text-primary nav-link">Retour</a>
+
+{{ form_end(formEmployes) }}
+
+</div>
+
+
+{% endblock %}
