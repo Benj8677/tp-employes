@@ -43,20 +43,20 @@ class EntrepriseController extends AbstractController
             $manager->persist($employes);
             $manager->flush();
             
-            if ($employes->getId() !== null)
-            {
-                $id = $employes->getId();
-                $this->addFlash('success', "L'employé n°$id a bien été modifié !");
-            }
-            else
-            {
-                $this->addFlash('success', "L'employé a bien été ajouté !");
-            }
-
 
             return $this->redirectToRoute("app_entreprise", [
                 'id' => $employes->getId()
             ]);
+        }
+
+        if ($employes->getId() !== null)
+        {
+            $id = $employes->getId();
+            $this->addFlash('success', "L'employé n°$id a bien été modifié !");
+        }
+        else
+        {
+            $this->addFlash('success', "L'employé a bien été ajouté !");
         }
 
         return $this->renderForm("entreprise/form.html.twig", [
